@@ -1,10 +1,12 @@
 import { useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function Details() {
-  const params = useLocalSearchParams();
-
-  console.log(params);
+  const { title, image, imageBack } = useLocalSearchParams<{
+    title: string;
+    image: string;
+    imageBack: string;
+  }>();
 
   return (
     <ScrollView
@@ -13,7 +15,14 @@ export default function Details() {
         padding: 16
       }}
     >
-      <Text style={styles.title}>{params.name}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        <Image
+          source={{ uri: imageBack }}
+          style={{ width: 200, height: 200 }}
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -21,7 +30,7 @@ export default function Details() {
 const styles = StyleSheet.create({
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontWeight: 800,
     textAlign: 'center'
   }
 });

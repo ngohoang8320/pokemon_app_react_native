@@ -1,12 +1,6 @@
 import { Link } from 'expo-router';
 import { useEffect, useState } from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 interface Pokemon {
   name: string;
@@ -90,7 +84,14 @@ export default function ModalScreen() {
         return (
           <Link
             key={pokemon.name}
-            href={{ pathname: '/details', params: { name: pokemon.name } }}
+            href={{
+              pathname: '/details',
+              params: {
+                title: pokemon.name,
+                image: pokemon.image,
+                imageBack: pokemon.imageBack
+              }
+            }}
             style={{
               backgroundColor: colorByType[pokemon.types[0].type.name] + 50,
               padding: 20,
